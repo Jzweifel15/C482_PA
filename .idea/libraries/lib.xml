@@ -2,6 +2,7 @@
   <library name="lib">
     <CLASSES>
       <root url="file://$PATH_TO_FX$/lib" />
+      <root url="file://$PROJECT_DIR$/../../javafx-sdk-17.0.7/lib" />
     </CLASSES>
     <JAVADOC />
     <NATIVE>
@@ -9,5 +10,6 @@
     </NATIVE>
     <SOURCES />
     <jarDirectory url="file://$PATH_TO_FX$/lib" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../../javafx-sdk-17.0.7/lib" recursive="false" />
   </library>
 </component>
