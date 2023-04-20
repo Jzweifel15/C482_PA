@@ -67,4 +67,7 @@ public class MainController implements Initializable {
         stage.setResizable(false);
         stage.show();
     }
+
+    public void onModifyPartClicked(ActionEvent actionEvent) {
+    }
 }
