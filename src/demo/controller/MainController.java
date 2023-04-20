@@ -68,6 +68,13 @@ public class MainController implements Initializable {
         stage.show();
     }
 
-    public void onModifyPartClicked(ActionEvent actionEvent) {
+    public void onModifyPartClicked(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/demo/view/modify-part-view.fxml"));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 600, 600);
+        stage.setTitle("Modify Part");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
     }
 }
