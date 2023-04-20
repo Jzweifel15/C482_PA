@@ -37,4 +37,7 @@ public class AddPartController implements Initializable {
      */
     public void savePartButton(ActionEvent actionEvent) {
     }
+
+    public void onCancelButton(ActionEvent actionEvent) {
+    }
 }
