@@ -1,12 +1,16 @@
 package demo.controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
-public class ModifyPartController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ModifyPartController implements Initializable {
 
 
     public RadioButton inHouseRadioButton;
@@ -21,6 +25,9 @@ public class ModifyPartController {
     public TextField minTextField;
     public Button savePartButton;
     public Button CancelPartButton;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) { }
 
     public void onCancel(ActionEvent actionEvent) {
     }
