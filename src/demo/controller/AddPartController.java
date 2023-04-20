@@ -44,7 +44,7 @@ public class AddPartController implements Initializable {
     public void savePartButton(ActionEvent actionEvent) {
     }
 
-    public void onCancelButton(ActionEvent actionEvent) throws IOException {
+    public void onCancel(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/demo/view/main-view.fxml"));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 400);
