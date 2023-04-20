@@ -58,7 +58,7 @@ public class MainController implements Initializable {
      * Transitions to the Add Part Form for the user to add a new part to the Parts TableView
      * @param actionEvent an action event object
      */
-    public void onAddClicked(ActionEvent actionEvent) throws IOException {
+    public void onAddPartClicked(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/demo/view/add-part-view.fxml"));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 600, 600);
