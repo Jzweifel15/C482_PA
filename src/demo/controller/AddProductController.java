@@ -45,6 +45,11 @@ public class AddProductController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) { }
 
+    /**
+     * Cancels the Add Product request and transitions back to the Main Form
+     * @param actionEvent an action event object
+     * @throws IOException when the getResource method cannot find the fxml file to transition back to
+     */
     public void onCancel(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/demo/view/main-view.fxml"));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
