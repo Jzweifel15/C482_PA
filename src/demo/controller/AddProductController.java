@@ -1,11 +1,15 @@
 package demo.controller;
 
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class AddProductController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AddProductController implements Initializable {
     public TextField nameTextField;
     public TextField idTextField;
     public TextField inventoryTextField;
@@ -30,4 +34,7 @@ public class AddProductController {
     public Button removeAssociatedPartButton;
     public Button saveProductButton;
     public Button cancelProductButton;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) { }
 }
