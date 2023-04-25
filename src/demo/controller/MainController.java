@@ -1,5 +1,6 @@
 package demo.controller;
 
+import demo.model.Inventory;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+
+    public Inventory inventory;
 
     public AnchorPane mainFormPane;
     public Pane partsPane;
@@ -50,7 +53,9 @@ public class MainController implements Initializable {
     // Exit Main Form (quits the program)
     public Button mainFormExitButton;
 
-    public MainController() { }
+    public MainController() {
+       // this.inventory = inventory;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {}

@@ -6,7 +6,7 @@ import javafx.collections.FXCollections;
 /**
  * @author Justin R. Zweifel
  */
-class Inventory {
+public class Inventory {
 
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
     private ObservableList<Product> allProducts = FXCollections.observableArrayList();

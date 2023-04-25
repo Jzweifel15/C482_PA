@@ -3,7 +3,7 @@ package demo.model;
 /**
  * @author Justin R. Zweifel
  */
-class Outsourced extends Part {
+public class Outsourced extends Part {
 
     private String companyName;
 
@@ -27,6 +27,13 @@ class Outsourced extends Part {
      */
     public String getCompanyName() {
         return this.companyName;
+    }
+
+    @Override
+    public String toString() {
+        return "ID=" + this.getId() + ", Name=" + this.getName() + ", Price=" + this.getPrice() +
+                ", Stock=" + this.getStock() + ", Min=" + this.getMin() + ", Max=" + this.getMax() +
+                ", CompanyName=" + this.getCompanyName();
     }
 
 }

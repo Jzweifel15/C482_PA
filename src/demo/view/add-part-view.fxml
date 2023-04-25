@@ -11,11 +11,11 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <RadioButton fx:id="inHouseRadioButton" layoutX="155.0" layoutY="66.0" mnemonicParsing="false" selected="true" text="In-House">
+        <RadioButton fx:id="inHouseRadioButton" layoutX="155.0" layoutY="66.0" mnemonicParsing="false" onMouseClicked="#inHouseSelected" selected="true" text="In-House">
          <toggleGroup>
             <ToggleGroup fx:id="tGroup" />
          </toggleGroup></RadioButton>
-        <RadioButton fx:id="outsourcedRadioButton" layoutX="300.0" layoutY="66.0" mnemonicParsing="false" text="Outsourced" toggleGroup="$tGroup" />
+        <RadioButton fx:id="outsourcedRadioButton" layoutX="300.0" layoutY="66.0" mnemonicParsing="false" onMouseClicked="#outsourcedSelected" text="Outsourced" toggleGroup="$tGroup" />
         <Label fx:id="idLabel" layoutX="54.0" layoutY="142.0" text="ID" />
         <Label fx:id="nameLabel" layoutX="54.0" layoutY="189.0" text="Name" />
         <Label fx:id="inventoryLabel" layoutX="54.0" layoutY="231.0" text="Inv" />
