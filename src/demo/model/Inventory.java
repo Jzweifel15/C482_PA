@@ -33,6 +33,10 @@ class Inventory {
      */
     public void addPart(Part newPart) {
 
+        if (newPart != null) {
+            this.allParts.add(newPart);
+        }
+
     }
 
     /**
