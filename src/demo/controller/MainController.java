@@ -58,6 +58,7 @@ public class MainController implements Initializable {
     /**
      * Transitions to the Add Part Form for the user to add a new part to the Parts TableView
      * @param actionEvent an action event object
+     * @throws IOException when the getResource method cannot find the fxml file to transition back to
      */
     public void onAddPartClicked(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/demo/view/add-part-view.fxml"));
@@ -69,6 +70,11 @@ public class MainController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Transitions to the Modify Part Form for the user to modify an existing part from the Parts TableView
+     * @param actionEvent an action event object
+     * @throws IOException when the getResource method cannot find the fxml file to transition back to
+     */
     public void onModifyPartClicked(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/demo/view/modify-part-view.fxml"));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -87,6 +93,11 @@ public class MainController implements Initializable {
         Platform.exit();
     }
 
+    /**
+     * Transitions to the Add Product Form for the user to add a new product to the Products TableView
+     * @param actionEvent an action event object
+     * @throws IOException when the getResource method cannot find the fxml file to transition back to
+     */
     public void onAddProductClicked(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/demo/view/add-product-view.fxml"));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
