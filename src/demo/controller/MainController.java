@@ -79,7 +79,21 @@ public class MainController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Action Event for the exit button that will quit the entire program when pressed
+     * @param actionEvent an action event object
+     */
     public void exitButtonClicked(ActionEvent actionEvent) {
         Platform.exit();
+    }
+
+    public void onAddProductClicked(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/demo/view/add-product-view.fxml"));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 900, 600);
+        stage.setTitle("Add Product");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
     }
 }
