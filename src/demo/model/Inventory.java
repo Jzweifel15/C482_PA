@@ -44,6 +44,10 @@ class Inventory {
      */
     public void addProduct(Product newProduct) {
 
+        if (newProduct != null) {
+            this.allProducts.add(newProduct);
+        }
+
     }
 
 //    /**
