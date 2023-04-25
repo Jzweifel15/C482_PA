@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="modifyProductFormPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="demo.controller.ModifyProductController">
     <children>
@@ -48,6 +43,6 @@
         <Button fx:id="addAssociatedPartButton" layoutX="793.0" layoutY="262.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Add" />
         <Button fx:id="removeAssociatedPartButton" layoutX="697.0" layoutY="510.0" mnemonicParsing="false" text="Remove Associated Part" />
         <Button fx:id="saveProductButton" layoutX="697.0" layoutY="547.0" mnemonicParsing="false" text="Save" />
-        <Button fx:id="cancelProductButton" layoutX="793.0" layoutY="547.0" mnemonicParsing="false" text="Cancel" />
+        <Button fx:id="cancelProductButton" layoutX="793.0" layoutY="547.0" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
     </children>
 </AnchorPane>
