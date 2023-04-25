@@ -96,4 +96,19 @@ public class MainController implements Initializable {
         stage.setResizable(false);
         stage.show();
     }
+
+    /**
+     * Transitions to the Modify Product Form for the user to modify a an existing product from the Products TableView
+     * @param actionEvent an action event object
+     * @throws IOException when the getResource method cannot find the fxml file to transition back to
+     */
+    public void onModifyProductClicked(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/demo/view/modify-product-view.fxml"));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 900, 600);
+        stage.setTitle("Modify Product");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+    }
 }

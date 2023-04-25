@@ -39,7 +39,7 @@
                     </columns>
                 </TableView>
                 <Button fx:id="productAddButton" layoutX="192.0" layoutY="234.0" mnemonicParsing="false" onAction="#onAddProductClicked" text="Add" />
-                <Button fx:id="productModifyButton" layoutX="250.0" layoutY="234.0" mnemonicParsing="false" text="Modify" />
+                <Button fx:id="productModifyButton" layoutX="250.0" layoutY="234.0" mnemonicParsing="false" onAction="#onModifyProductClicked" text="Modify" />
                 <Button fx:id="productDeleteButton" layoutX="320.0" layoutY="234.0" mnemonicParsing="false" text="Delete" />
                 <Label layoutX="14.0" layoutY="21.0" text="Products" />
                 <TextField fx:id="productSearchField" layoutX="221.0" layoutY="17.0" promptText="Search by ID or Name" />
