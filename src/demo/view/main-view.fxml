@@ -45,6 +45,6 @@
                 <TextField fx:id="productSearchField" layoutX="221.0" layoutY="17.0" promptText="Search by ID or Name" />
             </children>
         </Pane>
-        <Button fx:id="mainFormExitButton" layoutX="833.0" layoutY="361.0" mnemonicParsing="false" text="Exit" />
+        <Button fx:id="mainFormExitButton" layoutX="833.0" layoutY="361.0" mnemonicParsing="false" onAction="#exitButtonClicked" text="Exit" />
     </children>
 </AnchorPane>

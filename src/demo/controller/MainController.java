@@ -1,5 +1,6 @@
 package demo.controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -76,5 +77,9 @@ public class MainController implements Initializable {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+    }
+
+    public void exitButtonClicked(ActionEvent actionEvent) {
+        Platform.exit();
     }
 }
