@@ -48,6 +48,6 @@
         <Button fx:id="addAssociatedPartButton" layoutX="793.0" layoutY="262.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Add" />
         <Button fx:id="removeAssociatedPartButton" layoutX="697.0" layoutY="510.0" mnemonicParsing="false" text="Remove Associated Part" />
         <Button fx:id="saveProductButton" layoutX="697.0" layoutY="547.0" mnemonicParsing="false" text="Save" />
-        <Button fx:id="cancelProductButton" layoutX="793.0" layoutY="547.0" mnemonicParsing="false" text="Cancel" />
+        <Button fx:id="cancelProductButton" layoutX="793.0" layoutY="547.0" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
     </children>
 </AnchorPane>
