@@ -11,8 +11,11 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <RadioButton fx:id="inHouseRadioButton" layoutX="155.0" layoutY="66.0" mnemonicParsing="false" text="In-House" />
-        <RadioButton fx:id="outsourcedRadioButton" layoutX="300.0" layoutY="66.0" mnemonicParsing="false" text="Outsourced" />
+        <RadioButton fx:id="inHouseRadioButton" layoutX="155.0" layoutY="66.0" mnemonicParsing="false" onMouseClicked="#inHouseSelected" text="In-House">
+         <toggleGroup>
+            <ToggleGroup fx:id="tGroup" />
+         </toggleGroup></RadioButton>
+        <RadioButton fx:id="outsourcedRadioButton" layoutX="300.0" layoutY="66.0" mnemonicParsing="false" onMouseClicked="#outsourcedSelected" text="Outsourced" toggleGroup="$tGroup" />
         <Label fx:id="idLabel" layoutX="54.0" layoutY="142.0" text="ID" />
         <Label fx:id="nameLabel" layoutX="54.0" layoutY="189.0" text="Name" />
         <Label fx:id="inventoryLabel" layoutX="54.0" layoutY="231.0" text="Inv" />
@@ -27,7 +30,7 @@
         <TextField fx:id="machineIdOrCompanyNameTextField" layoutX="150.0" layoutY="379.0" prefHeight="25.0" prefWidth="145.0" />
         <Label fx:id="minLabel" layoutX="324.0" layoutY="333.0" text="Min" />
         <TextField fx:id="minTextField" layoutX="364.0" layoutY="329.0" prefHeight="25.0" prefWidth="145.0" />
-        <Button fx:id="savePartButton" layoutX="335.0" layoutY="502.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Save" />
+        <Button fx:id="savePartButton" layoutX="335.0" layoutY="502.0" mnemonicParsing="false" onAction="#saveModificationToPart" prefHeight="25.0" prefWidth="68.0" text="Save" />
         <Button fx:id="CancelPartButton" layoutX="428.0" layoutY="502.0" mnemonicParsing="false" onAction="#onCancel" prefHeight="25.0" prefWidth="68.0" text="Cancel" />
     </children>
 </AnchorPane>

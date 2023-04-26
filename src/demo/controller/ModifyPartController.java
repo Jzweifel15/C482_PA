@@ -10,10 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -72,13 +70,81 @@ public class ModifyPartController implements Initializable {
         }
     }
 
+    public void saveModificationToPart(ActionEvent actionEvent) throws IOException {
+        int index = this.inventory.getAllParts().indexOf(this.part);
+        int id;
+        String name;
+        int inv;
+        double priceCost;
+        int max;
+        int min;
+        String machineIdOrCompanyName;
+
+        // Check that TextFields are filled in
+        if (!(nameTextField.getText().isEmpty()) && !(inventoryTextField.getText().isEmpty()) &&
+                !(priceCostTextField.getText().isEmpty()) && !(maxTextField.getText().isEmpty()) &&
+                !(minTextField.getText().isEmpty()) && !(machineIdOrCompanyNameTextField.getText().isEmpty())) {
+
+            // Set variables to their respective TextField values
+            id = Integer.parseInt(idTextField.getText());
+            name = nameTextField.getText();
+            inv = Integer.parseInt(inventoryTextField.getText());
+            priceCost = Double.parseDouble(priceCostTextField.getText());
+            max = Integer.parseInt(maxTextField.getText());
+            min = Integer.parseInt(minTextField.getText());
+            machineIdOrCompanyName = machineIdOrCompanyNameTextField.getText();
+
+            // Check which radio button is chosen, then add the part in accordance to the chosen radio button
+            if (inHouseRadioButton.isSelected()) {
+                InHouse inHouse = new InHouse(id, name, priceCost, inv, min, max, Integer.parseInt(machineIdOrCompanyName));
+                inventory.updatePart(index, inHouse);
+            }
+            else if (outsourcedRadioButton.isSelected()) {
+                Outsourced outsourced = new Outsourced(id, name, priceCost, inv, min, max, machineIdOrCompanyName);
+                inventory.updatePart(index, outsourced);
+            }
+
+            // Transition back to Main View
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/main-view.fxml"));
+            MainController controller = new MainController(this.inventory);
+            fxmlLoader.setController(controller);
+
+            Parent root = fxmlLoader.load();
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 900, 400);
+            stage.setTitle("Inventory Management System!");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error Modifying Part");
+            alert.setContentText("We ran into an issue trying when performing your Part modification request. Please verify that all fields are filled in correctly and try again.");
+            alert.showAndWait();
+        }
+    }
+
     public void onCancel(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/demo/view/main-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/main-view.fxml"));
+        MainController controller = new MainController(this.inventory);
+        fxmlLoader.setController(controller);
+
+        Parent root = fxmlLoader.load();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 400);
         stage.setTitle("Inventory Management System!");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+    }
+
+    public void inHouseSelected(MouseEvent mouseEvent) {
+        machineIdOrCompanyNameLabel.setText("Machine ID");
+    }
+
+    public void outsourcedSelected(MouseEvent mouseEvent) {
+        machineIdOrCompanyNameLabel.setText("Company Name");
     }
 }

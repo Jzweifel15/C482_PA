@@ -87,7 +87,12 @@ public class Inventory {
      * @param selectedPart
      */
     public void updatePart(int index, Part selectedPart) {
-
+        for (Part p : Inventory.allParts) {
+            if (allParts.get(index).getId() == selectedPart.getId()) {
+                allParts.set(index, selectedPart);
+                break;
+            }
+        }
     }
 
     /**
