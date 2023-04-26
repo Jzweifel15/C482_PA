@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -51,7 +52,14 @@ public class AddProductController implements Initializable {
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) { }
+    public void initialize(URL location, ResourceBundle resources) {
+        // Add all Parts in inventory to the top TableView
+        partTableView1.setItems(this.inventory.getAllParts());
+        partIdTable1Column.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameTable1Column.setCellValueFactory(new PropertyValueFactory<>("name"));
+        inventoryLevelTable1Column.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        pricePerUnitTable1Column.setCellValueFactory(new PropertyValueFactory<>("price"));
+    }
 
     /**
      * Cancels the Add Product request and transitions back to the Main Form

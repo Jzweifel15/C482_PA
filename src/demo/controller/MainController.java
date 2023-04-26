@@ -128,9 +128,8 @@ public class MainController implements Initializable {
      */
     public void onAddProductClicked(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/add-product-view.fxml"));
-        AddPartController controller = new AddPartController(this.inventory);
+        AddProductController controller = new AddProductController(this.inventory);
         fxmlLoader.setController(controller);
-        //Parent root = FXMLLoader.load(getClass().getResource("/demo/view/add-product-view.fxml"));
 
         Parent root = fxmlLoader.load();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
