@@ -122,20 +122,17 @@ public class MainController implements Initializable {
     }
 
     /**
-     * Action Event for the exit button that will quit the entire program when pressed
-     * @param actionEvent an action event object
-     */
-    public void exitButtonClicked(ActionEvent actionEvent) {
-        Platform.exit();
-    }
-
-    /**
      * Transitions to the Add Product Form for the user to add a new product to the Products TableView
      * @param actionEvent an action event object
      * @throws IOException when the getResource method cannot find the fxml file to transition back to
      */
     public void onAddProductClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/demo/view/add-product-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/add-product-view.fxml"));
+        AddPartController controller = new AddPartController(this.inventory);
+        fxmlLoader.setController(controller);
+        //Parent root = FXMLLoader.load(getClass().getResource("/demo/view/add-product-view.fxml"));
+
+        Parent root = fxmlLoader.load();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 600);
         stage.setTitle("Add Product");
@@ -157,5 +154,13 @@ public class MainController implements Initializable {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+    }
+
+    /**
+     * Action Event for the exit button that will quit the entire program when pressed
+     * @param actionEvent an action event object
+     */
+    public void exitButtonClicked(ActionEvent actionEvent) {
+        Platform.exit();
     }
 }
