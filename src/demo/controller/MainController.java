@@ -1,7 +1,9 @@
 package demo.controller;
 
 import demo.model.Inventory;
+import demo.model.Part;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -54,11 +57,29 @@ public class MainController implements Initializable {
     public Button mainFormExitButton;
 
     public MainController() {
-       // this.inventory = inventory;
+        Inventory inventory = new Inventory();
+    }
+
+    public MainController(Inventory inventory) {
+        this.inventory = inventory;
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {}
+    public void initialize(URL location, ResourceBundle resources) {
+        // Add all Parts to the PartsTableView
+        partsTableView.setItems(this.inventory.getAllParts());
+        partIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partInventoryLevelColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPricePerUnitColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        // Add all Products to the ProductsTableView
+        productsTableView.setItems(this.inventory.getAllParts());
+        productIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productInventoryLevelColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productPricePerUnitColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+    }
 
     /**
      * Transitions to the Add Part Form for the user to add a new part to the Parts TableView
@@ -66,7 +87,12 @@ public class MainController implements Initializable {
      * @throws IOException when the getResource method cannot find the fxml file to transition back to
      */
     public void onAddPartClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/demo/view/add-part-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/add-part-view.fxml"));
+        AddPartController controller = new AddPartController(this.inventory);
+        //Parent root = FXMLLoader.load(getClass().getResource("/demo/view/add-part-view.fxml"));
+        fxmlLoader.setController(controller);
+
+        Parent root = fxmlLoader.load();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 600, 600);
         stage.setTitle("Add Part");

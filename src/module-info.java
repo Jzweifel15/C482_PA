@@ -8,4 +8,7 @@ module Demo {
 
     exports demo.controller;
     opens demo.controller to javafx.fxml;
+
+    exports demo.model;
+    opens demo.model to javafx.base;
 }

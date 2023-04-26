@@ -36,7 +36,7 @@ public class AddPartController implements Initializable {
     public Button CancelPartButton;
     public Label machineIdOrCompanyNameLabel;
 
-    public AddPartController() {
+    public AddPartController(Inventory inventory) {
         this.inventory = new Inventory();
     }
 
@@ -73,12 +73,12 @@ public class AddPartController implements Initializable {
             if (inHouseRadioButton.isSelected()) {
                 InHouse inHouse = new InHouse(id, name, priceCost, inv, min, max, Integer.parseInt(machineIdOrCompanyName));
                 inventory.addPart(inHouse);
-                System.out.println(inHouse.toString());
+                //System.out.println(inHouse.toString());
             }
             else if (outsourcedRadioButton.isSelected()) {
                 Outsourced outsourced = new Outsourced(id, name, priceCost, inv, min, max, machineIdOrCompanyName);
                 inventory.addPart(outsourced);
-                System.out.println(outsourced.toString());
+                //System.out.println(outsourced.toString());
             }
 
             // Clear all TextFields before transitioning back to Main View
@@ -90,7 +90,12 @@ public class AddPartController implements Initializable {
             machineIdOrCompanyNameTextField.clear();
 
             // Transition back to Main View
-            Parent root = FXMLLoader.load(getClass().getResource("/demo/view/main-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/main-view.fxml"));
+            MainController controller = new MainController(this.inventory);
+            //Parent root = FXMLLoader.load(getClass().getResource("/demo/view/main-view.fxml"));
+            fxmlLoader.setController(controller);
+
+            Parent root = fxmlLoader.load();
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 900, 400);
             stage.setTitle("Inventory Management System!");
@@ -113,7 +118,12 @@ public class AddPartController implements Initializable {
      * @throws IOException when the getResource method cannot find the fxml file to transition back to
      */
     public void onCancel(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/demo/view/main-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/main-view.fxml"));
+        MainController controller = new MainController(this.inventory);
+        //Parent root = FXMLLoader.load(getClass().getResource("/demo/view/main-view.fxml"));
+        fxmlLoader.setController(controller);
+
+        Parent root = fxmlLoader.load();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 400);
         stage.setTitle("Inventory Management System!");

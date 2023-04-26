@@ -6,7 +6,7 @@ import javafx.collections.FXCollections;
 /**
  * @author Justin R. Zweifel
  */
-class Product {
+public class Product {
 
     private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     private int id;
