@@ -50,13 +50,19 @@ public class Inventory {
 
     }
 
-//    /**
-//     * @param partId the ID of the part to look up
-//     * @return the found Part with partId
-//     */
-//    public Part lookupPart(int partId) {
-//
-//    }
+    /**
+     * @param partId the ID of the part to look up
+     * @return the found Part with partId
+     */
+    public Part lookupPart(int partId) {
+        for (Part p : Inventory.allParts) {
+            if (p.getId() == partId) {
+                return p;
+            }
+        }
+
+        return null;
+    }
 
 //    /**
 //     * @param partName the name of the part to look up
