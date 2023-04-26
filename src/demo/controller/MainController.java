@@ -89,7 +89,6 @@ public class MainController implements Initializable {
     public void onAddPartClicked(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/add-part-view.fxml"));
         AddPartController controller = new AddPartController(this.inventory);
-        //Parent root = FXMLLoader.load(getClass().getResource("/demo/view/add-part-view.fxml"));
         fxmlLoader.setController(controller);
 
         Parent root = fxmlLoader.load();
@@ -107,7 +106,13 @@ public class MainController implements Initializable {
      * @throws IOException when the getResource method cannot find the fxml file to transition back to
      */
     public void onModifyPartClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/demo/view/modify-part-view.fxml"));
+        Part partSelected = (Part) partsTableView.getSelectionModel().getSelectedItem();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/modify-part-view.fxml"));
+        ModifyPartController controller = new ModifyPartController(this.inventory, partSelected);
+        fxmlLoader.setController(controller);
+
+        Parent root = fxmlLoader.load();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 600, 600);
         stage.setTitle("Modify Part");
