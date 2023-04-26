@@ -1,6 +1,7 @@
 package demo.controller;
 
 import demo.model.Inventory;
+import demo.model.Part;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -59,6 +60,11 @@ public class AddProductController implements Initializable {
         partNameTable1Column.setCellValueFactory(new PropertyValueFactory<>("name"));
         inventoryLevelTable1Column.setCellValueFactory(new PropertyValueFactory<>("stock"));
         pricePerUnitTable1Column.setCellValueFactory(new PropertyValueFactory<>("price"));
+    }
+
+    // FIXME: Add the rest of the logic to add an associated part for a new Product
+    public void addAssociatedPart(ActionEvent actionEvent) throws IOException {
+        Part partSelected = (Part) partTableView1.getSelectionModel().getSelectedItem();
     }
 
     /**
