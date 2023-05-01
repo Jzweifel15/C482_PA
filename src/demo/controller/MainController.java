@@ -74,7 +74,7 @@ public class MainController implements Initializable {
         partPricePerUnitColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         // Add all Products to the ProductsTableView
-        productsTableView.setItems(this.inventory.getAllParts());
+        productsTableView.setItems(this.inventory.getAllProducts());
         productIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         productNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         productInventoryLevelColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
