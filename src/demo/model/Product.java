@@ -30,7 +30,7 @@ public class Product {
      * @param part the specific Part to be added as the associated Part for the Product
      */
     public void addAssociatedPart(Part part) {
-
+        this.associatedParts.add(part);
     }
 
     /**
@@ -148,6 +148,13 @@ public class Product {
      */
     public int getMax() {
         return this.max;
+    }
+
+    @Override
+    public String toString() {
+        return "ID=" + this.getId() + ", Name=" + this.getName() + ", Price=" + this.getPrice() +
+                ", Stock=" + this.getStock() + ", Min=" + this.getMin() + ", Max=" + this.getMax() +
+                ", AssociatedParts=" + this.getAssociatedParts();
     }
 
 }
