@@ -78,7 +78,11 @@ public class AddProductController implements Initializable {
         pricePerUnitTable2Column.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
-    public void addAssociatedPart(ActionEvent actionEvent) throws IOException {
+    /**
+     * Add the selected associated part from the top (All Parts) TableView
+     * @param actionEvent an action even object
+     */
+    public void addAssociatedPart(ActionEvent actionEvent) {
         Part partSelected = (Part) partTableView1.getSelectionModel().getSelectedItem();
 
         if (partSelected == null) {
