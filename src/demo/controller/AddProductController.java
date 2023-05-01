@@ -11,16 +11,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class AddProductController implements Initializable {
@@ -33,7 +31,7 @@ public class AddProductController implements Initializable {
     public TextField nameTextField;
     public TextField idTextField;
     public TextField inventoryTextField;
-    public TextField PriceCostTextField;
+    public TextField priceCostTextField;
     public TextField maxTextField;
     public TextField searchPartTextField;
     public TextField minTextField;
@@ -76,6 +74,71 @@ public class AddProductController implements Initializable {
         partNameTable2Column.setCellValueFactory(new PropertyValueFactory<>("name"));
         inventoryLevelTable2Column.setCellValueFactory(new PropertyValueFactory<>("stock"));
         pricePerUnitTable2Column.setCellValueFactory(new PropertyValueFactory<>("price"));
+    }
+
+    /**
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
+    public void saveProduct (ActionEvent actionEvent) throws IOException {
+        int id = generateRandomId();
+        String name;
+        int inv;
+        double priceCost;
+        int max;
+        int min;
+        Product newProduct;
+
+        // Check that TextFields are filled in
+        if (!(nameTextField.getText().isEmpty()) && !(inventoryTextField.getText().isEmpty()) &&
+                !(priceCostTextField.getText().isEmpty()) && !(maxTextField.getText().isEmpty()) &&
+                !(minTextField.getText().isEmpty())) {
+
+            // Set variables to their respective TextField values
+            name = nameTextField.getText();
+            inv = Integer.parseInt(inventoryTextField.getText());
+            priceCost = Double.parseDouble(priceCostTextField.getText());
+            max = Integer.parseInt(maxTextField.getText());
+            min = Integer.parseInt(minTextField.getText());
+
+            // Create a new Product instance
+            newProduct = new Product(id, name, priceCost, inv, min, max);
+
+            // Add all the selected associated parts to the new Product's list of associated parts
+            for (Part associatedPart : this.associatedParts) {
+                newProduct.addAssociatedPart(associatedPart);
+            }
+
+            inventory.addProduct(newProduct);
+
+            // Clear all TextFields before transitioning back to Main View
+            nameTextField.clear();
+            inventoryTextField.clear();
+            priceCostTextField.clear();
+            maxTextField.clear();
+            minTextField.clear();
+
+            // Transition back to Main View
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/main-view.fxml"));
+            MainController controller = new MainController(this.inventory);
+            fxmlLoader.setController(controller);
+
+            Parent root = fxmlLoader.load();
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 900, 400);
+            stage.setTitle("Inventory Management System!");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error Adding New Product");
+            alert.setContentText("We ran into an issue trying to add your new product request. Please verify that all fields are filled in and try again.");
+            alert.showAndWait();
+        }
     }
 
     /**
@@ -131,5 +194,12 @@ public class AddProductController implements Initializable {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+    }
+
+    public int generateRandomId() {
+        Random rand = new Random();
+        Integer randNum = rand.nextInt(100);
+
+        return randNum;
     }
 }
