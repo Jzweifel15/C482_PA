@@ -78,7 +78,6 @@ public class AddProductController implements Initializable {
         pricePerUnitTable2Column.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
-    // FIXME: Add the rest of the logic to add an associated part for a new Product
     public void addAssociatedPart(ActionEvent actionEvent) throws IOException {
         Part partSelected = (Part) partTableView1.getSelectionModel().getSelectedItem();
 
@@ -91,6 +90,24 @@ public class AddProductController implements Initializable {
 
         // Move selectedPart to bottom TableView (Associated Parts)
         associatedParts.add(partSelected);
+    }
+
+    /**
+     * Removes the selected associated part from the bottom (Associated Parts) TableView
+     * @param actionEvent an action event objects
+     */
+    public void removeAssociatedPart(ActionEvent actionEvent) {
+        Part partSelected = (Part) partTableView2.getSelectionModel().getSelectedItem();
+
+        if (partSelected == null) {
+            return;
+        }
+
+        // Remove the selected, associated part from the bottom TableView (Associated Parts)
+        associatedParts.remove(partSelected);
+
+        // Add the selectedPart back to the top TableView (All Parts)
+        allParts.add(partSelected);
     }
 
     /**
