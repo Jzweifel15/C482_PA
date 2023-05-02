@@ -173,8 +173,8 @@ public class MainController implements Initializable {
     }
 
     /**
-     *
-     * @param actionEvent
+     * Searches for the Part by its name or for the supplied Part ID
+     * @param actionEvent an ActionEvent object
      */
     public void searchForPart(ActionEvent actionEvent) {
         String input = partSearchField.getText();
