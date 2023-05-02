@@ -17,7 +17,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collections;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -53,12 +52,21 @@ public class AddProductController implements Initializable {
     public Button saveProductButton;
     public Button cancelProductButton;
 
+    /**
+     * Constructor for the Add Product Controller
+     * @param inventory the current state of the inventory
+     */
     public AddProductController(Inventory inventory) {
         this.inventory = inventory;
         this.allParts = FXCollections.observableArrayList(inventory.getAllParts());
         this.associatedParts = FXCollections.observableArrayList();
     }
 
+    /**
+     * Add initial data to the TableViews when the Add Product View is accessed
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Add all Parts in inventory to the top TableView
@@ -77,9 +85,9 @@ public class AddProductController implements Initializable {
     }
 
     /**
-     *
-     * @param actionEvent
-     * @throws IOException
+     * Save the new Product and transition back to the Main View
+     * @param actionEvent an ActionEvent object
+     * @throws IOException when the getResource method cannot find the fxml file to transition back to
      */
     public void saveProduct (ActionEvent actionEvent) throws IOException {
         int id = generateRandomId();
@@ -142,8 +150,8 @@ public class AddProductController implements Initializable {
     }
 
     /**
-     * Add the selected associated part from the top (All Parts) TableView
-     * @param actionEvent an action even object
+     * Add the selected part from the top (All Parts) TableView to the bottom (Associated Parts) TableView
+     * @param actionEvent an ActionEvent object
      */
     public void addAssociatedPart(ActionEvent actionEvent) {
         Part partSelected = (Part) partTableView1.getSelectionModel().getSelectedItem();
@@ -160,8 +168,8 @@ public class AddProductController implements Initializable {
     }
 
     /**
-     * Removes the selected associated part from the bottom (Associated Parts) TableView
-     * @param actionEvent an action event objects
+     * Removes the selected part from the bottom (Associated Parts) TableView back to the top (All Parts) TableView
+     * @param actionEvent an ActionEvent object
      */
     public void removeAssociatedPart(ActionEvent actionEvent) {
         Part partSelected = (Part) partTableView2.getSelectionModel().getSelectedItem();
@@ -179,7 +187,7 @@ public class AddProductController implements Initializable {
 
     /**
      * Cancels the Add Product request and transitions back to the Main Form
-     * @param actionEvent an action event object
+     * @param actionEvent an ActionEvent object
      * @throws IOException when the getResource method cannot find the fxml file to transition back to
      */
     public void onCancel(ActionEvent actionEvent) throws IOException {
@@ -196,6 +204,10 @@ public class AddProductController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Generates a random ID for the new Product
+     * @return the random ID
+     */
     public int generateRandomId() {
         Random rand = new Random();
         Integer randNum = rand.nextInt(100);
