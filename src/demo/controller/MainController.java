@@ -109,6 +109,10 @@ public class MainController implements Initializable {
     public void onModifyPartClicked(ActionEvent actionEvent) throws IOException {
         Part partSelected = (Part) partsTableView.getSelectionModel().getSelectedItem();
 
+        if (partSelected == null) {
+            return;
+        }
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/modify-part-view.fxml"));
         ModifyPartController controller = new ModifyPartController(this.inventory, partSelected);
         fxmlLoader.setController(controller);
