@@ -4,6 +4,7 @@ import demo.model.Inventory;
 import demo.model.Part;
 import demo.model.Product;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -171,10 +173,41 @@ public class MainController implements Initializable {
     }
 
     /**
+     *
+     * @param actionEvent
+     */
+    public void searchForPart(ActionEvent actionEvent) {
+        String input = partSearchField.getText();
+
+        ObservableList<Part> parts = this.inventory.lookupPart(input);
+
+        // Check if no Part was added to list through a partial/full name. If empty, then maybe user
+        // typed in a ID no., so search based on that argument
+        if (parts.size() == 0) {
+            try {
+                int id = Integer.parseInt(input);
+                Part part = inventory.lookupPart(id);
+
+                if (part != null) {
+                    parts.add(part);
+                }
+            }
+            catch (NumberFormatException e) {
+                // ignore for now...
+            }
+        }
+
+        // Show the returned results in the TableView
+        partsTableView.setItems(parts);
+        partsTableView.refresh();
+    }
+
+    /**
      * Action Event for the exit button that will quit the entire program when pressed
      * @param actionEvent an action event object
      */
     public void exitButtonClicked(ActionEvent actionEvent) {
         Platform.exit();
     }
+
 }

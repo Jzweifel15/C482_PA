@@ -55,22 +55,47 @@ public class Inventory {
      * @return the found Part with partId
      */
     public Part lookupPart(int partId) {
-        for (Part p : Inventory.allParts) {
-            if (p.getId() == partId) {
-                return p;
+
+        // The list of all Parts to iterate through to check for the ID number
+        ObservableList<Part> allParts = this.getAllParts();
+
+        // Find Part with ID no. and return that Part
+        for (Part part : allParts) {
+            if (part.getId() == partId) {
+                return part;
             }
         }
 
+        // Will return NULL if no match is found
         return null;
+
+//        for (Part p : Inventory.allParts) {
+//            if (p.getId() == partId) {
+//                return p;
+//            }
+//        }
     }
 
-//    /**
-//     * @param partName the name of the part to look up
-//     * @return an ObservableList of multiple parts with the same name
-//     */
-//    public ObservableList<Part> lookupPart(String partName) {
-//
-//    }
+    /**
+     * @param partName the name of the part to look up
+     * @return an ObservableList of multiple parts with the same name
+     */
+    public ObservableList<Part> lookupPart(String partName) {
+        ObservableList<Part> namedParts = FXCollections.observableArrayList();
+
+        // The list of all Parts to iterate through to check for the partial name
+        ObservableList<Part> allParts = this.getAllParts();
+
+        for (Part part : allParts) {
+            // Returns a boolean to check if the partial name that has been entered in search field
+            // does or does not exist in allParts
+            if (part.getName().contains(partName)) {
+                namedParts.add(part);
+            }
+        }
+
+        return namedParts;
+    }
 
 //    /**
 //     * @param productId the ID of the product to look up

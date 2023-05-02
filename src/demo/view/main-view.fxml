@@ -25,7 +25,8 @@
                 <Button fx:id="partAddButton" layoutX="195.0" layoutY="234.0" mnemonicParsing="false" onAction="#onAddPartClicked" text="Add" />
                 <Button fx:id="partModifyButton" layoutX="254.0" layoutY="234.0" mnemonicParsing="false" onAction="#onModifyPartClicked" text="Modify" />
                 <Button fx:id="partDeleteButton" layoutX="328.0" layoutY="234.0" mnemonicParsing="false" text="Delete" />
-                <TextField fx:id="partSearchField" layoutX="230.0" layoutY="18.0" promptText="Search by ID or Name" />
+                <TextField fx:id="partSearchField" layoutX="188.0" layoutY="18.0"  promptText="Search by ID or Name" />
+            <Button fx:id="searchPartButton" layoutX="348.0" layoutY="18.0" mnemonicParsing="false" onAction="#searchForPart" text="Search" />
             </children>
         </Pane>
         <Pane fx:id="productsPane" layoutX="475.0" layoutY="64.0" prefHeight="273.0" prefWidth="396.0">
