@@ -39,6 +39,13 @@ public class Product {
      * @return true if the associated Part successfully deleted; false, if part is not found to be associated with the Product
      */
     public boolean deleteAssociatedPart(Part selectedAssociatedPart) {
+        for (Part associatedPart : associatedParts) {
+            if (selectedAssociatedPart.getId() == associatedPart.getId()) {
+                associatedParts.remove(selectedAssociatedPart);
+                return true;
+            }
+        }
+
         return false;
     }
 
