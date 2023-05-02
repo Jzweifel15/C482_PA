@@ -51,9 +51,16 @@ public class ModifyProductController implements Initializable {
     public Button saveProductButton;
     public Button cancelProductButton;
 
+    /**
+     * Constructor for the Modify Product Controller
+     * @param inventory the current state of the inventory
+     * @param product the selected Product instance to be modified
+     */
     public ModifyProductController(Inventory inventory, Product product) {
         this.inventory = inventory;
         this.product = product;
+
+        // Copy lists to new ones as to not change the originals
         this.allParts = FXCollections.observableArrayList(inventory.getAllParts());
         this.associatedParts = FXCollections.observableArrayList(product.getAssociatedParts());
 
@@ -68,6 +75,12 @@ public class ModifyProductController implements Initializable {
         }
      }
 
+    /**
+     * Set the TextFields with their respective, corresponding data. Also, add the correct data to the top (All Parts)
+     * and bottom (Associated Parts) TableViews
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         idTextField.setText(Integer.toString(this.product.getId()));
@@ -92,8 +105,8 @@ public class ModifyProductController implements Initializable {
 
     /**
      * Save changes made to the Product instance and transition back to the Main View
-     * @param actionEvent
-     * @throws IOException
+     * @param actionEvent an ActionEvent object
+     * @throws IOException when the getResource method cannot find the fxml file to transition back to
      */
     public void saveProduct(ActionEvent actionEvent) throws IOException {
         int index = this.inventory.getAllProducts().indexOf(this.product);
@@ -154,8 +167,8 @@ public class ModifyProductController implements Initializable {
     }
 
     /**
-     *
-     * @param actionEvent
+     * Adds the chosen Part from the top (All Parts) TableView to the bottom (Associated Parts) TableView
+     * @param actionEvent an ActionEvent object
      */
     public void addAssociatedPart(ActionEvent actionEvent) {
         Part partSelected = (Part) partTableView1.getSelectionModel().getSelectedItem();
@@ -171,6 +184,11 @@ public class ModifyProductController implements Initializable {
         associatedParts.add(partSelected);
     }
 
+    /**
+     * Removes the chosen Part from the bottom (Associated Parts) TableView and adds it back to the
+     * top (All Parts) TableView
+     * @param actionEvent
+     */
     public void removeAssociatedPart(ActionEvent actionEvent) {
         Part partSelected = (Part) partTableView2.getSelectionModel().getSelectedItem();
 
