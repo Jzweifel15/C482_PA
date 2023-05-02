@@ -203,6 +203,36 @@ public class MainController implements Initializable {
     }
 
     /**
+     *
+     * @param actionEvent
+     */
+    public void searchForProduct(ActionEvent actionEvent) {
+        String input = productSearchField.getText();
+
+        ObservableList<Product> products = this.inventory.lookupProduct(input);
+
+        // Check if no Product was added to list through a partial/full name. If empty, then maybe user
+        // typed in a ID no., so search based on that argument
+        if (products.size() == 0) {
+            try {
+                int id = Integer.parseInt(input);
+                Product product = inventory.lookupProduct(id);
+
+                if (product != null) {
+                    products.add(product);
+                }
+            }
+            catch (NumberFormatException e) {
+                // ignore for now...
+            }
+        }
+
+        // Show the returned results in the TableView
+        productsTableView.setItems(products);
+        productsTableView.refresh();
+    }
+
+    /**
      * Action Event for the exit button that will quit the entire program when pressed
      * @param actionEvent an action event object
      */

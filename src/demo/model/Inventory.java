@@ -32,22 +32,18 @@ public class Inventory {
      * @param newPart the new part to add to the allParts list
      */
     public void addPart(Part newPart) {
-
         if (newPart != null) {
             this.allParts.add(newPart);
         }
-
     }
 
     /**
      * @param newProduct the new product to add to the allProducts list
      */
     public void addProduct(Product newProduct) {
-
         if (newProduct != null) {
             this.allProducts.add(newProduct);
         }
-
     }
 
     /**
@@ -55,7 +51,6 @@ public class Inventory {
      * @return the found Part with partId
      */
     public Part lookupPart(int partId) {
-
         // The list of all Parts to iterate through to check for the ID number
         ObservableList<Part> allParts = this.getAllParts();
 
@@ -68,12 +63,6 @@ public class Inventory {
 
         // Will return NULL if no match is found
         return null;
-
-//        for (Part p : Inventory.allParts) {
-//            if (p.getId() == partId) {
-//                return p;
-//            }
-//        }
     }
 
     /**
@@ -97,21 +86,45 @@ public class Inventory {
         return namedParts;
     }
 
-//    /**
-//     * @param productId the ID of the product to look up
-//     * @return the found Product with productId
-//     */
-//    public Product lookupProduct(int productId) {
-//
-//    }
+    /**
+     * @param productId the ID of the product to look up
+     * @return the found Product with productId
+     */
+    public Product lookupProduct(int productId) {
+        // The list of all Parts to iterate through to check for the ID number
+        ObservableList<Product> allProducts = this.getAllProducts();
 
-//    /**
-//     * @param productName the name of the product to look up
-//     * @return an ObservableList of multiple products with the same name
-//     */
-//    public ObservableList<Product> lookupProduct(String productName) {
-//
-//    }
+        // Find Part with ID no. and return that Part
+        for (Product product : allProducts) {
+            if (product.getId() == productId) {
+                return product;
+            }
+        }
+
+        // Will return NULL if no match is found
+        return null;
+    }
+
+    /**
+     * @param productName the name of the product to look up
+     * @return an ObservableList of multiple products with the same name
+     */
+    public ObservableList<Product> lookupProduct(String productName) {
+        ObservableList<Product> namedProducts = FXCollections.observableArrayList();
+
+        // The list of all Products to iterate through to check for the partial name
+        ObservableList<Product> allProducts = this.getAllProducts();
+
+        for (Product product : allProducts) {
+            // Returns a boolean to check if the partial name that has been entered in search field
+            // does or does not exist in allProducts
+            if (product.getName().contains(productName)) {
+                namedProducts.add(product);
+            }
+        }
+
+        return namedProducts;
+    }
 
     /**
      * @param index
