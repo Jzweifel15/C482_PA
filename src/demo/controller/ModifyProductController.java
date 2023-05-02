@@ -187,7 +187,7 @@ public class ModifyProductController implements Initializable {
     /**
      * Removes the chosen Part from the bottom (Associated Parts) TableView and adds it back to the
      * top (All Parts) TableView
-     * @param actionEvent
+     * @param actionEvent an ActionEvent object
      */
     public void removeAssociatedPart(ActionEvent actionEvent) {
         Part partSelected = (Part) partTableView2.getSelectionModel().getSelectedItem();
@@ -205,7 +205,7 @@ public class ModifyProductController implements Initializable {
 
     /**
      * Cancels the Add Product request and transitions back to the Main Form
-     * @param actionEvent an action event object
+     * @param actionEvent an ActionEvent object
      * @throws IOException when the getResource method cannot find the fxml file to transition back to
      */
     public void onCancel(ActionEvent actionEvent) throws IOException {
