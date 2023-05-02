@@ -27,6 +27,7 @@ public class ModifyProductController implements Initializable {
     private Inventory inventory;
     private Product product;
     private ObservableList<Part> allParts;
+    private ObservableList<Part> associatedParts;
 
     public TextField nameTextField;
     public TextField idTextField;
@@ -56,18 +57,18 @@ public class ModifyProductController implements Initializable {
     public ModifyProductController(Inventory inventory, Product product) {
         this.inventory = inventory;
         this.product = product;
+        this.allParts = FXCollections.observableArrayList(inventory.getAllParts());
+        this.associatedParts = FXCollections.observableArrayList(product.getAssociatedParts());
 
         // Add the remaining Parts that are not associated with the passed Product
         // instance to the allParts List for the top TableView (All Parts)
-        this.allParts = FXCollections.observableArrayList(inventory.getAllParts());
         for (int i = 0; i < allParts.size(); i++) {
-            for (int j = 0; j < product.getAssociatedParts().size(); j++) {
-                if (product.getAssociatedParts().get(j).getId() == allParts.get(i).getId()) {
-                    allParts.remove(product.getAssociatedParts().get(j));
+            for (int j = 0; j < associatedParts.size(); j++) {
+                if (associatedParts.get(j).getId() == allParts.get(i).getId()) {
+                    allParts.remove(associatedParts.get(j));
                 }
             }
         }
-
      }
 
     @Override
@@ -85,11 +86,43 @@ public class ModifyProductController implements Initializable {
         inventoryLevelTable1Column.setCellValueFactory(new PropertyValueFactory<>("stock"));
         pricePerUnitTable1Column.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        partTableView2.setItems(this.product.getAssociatedParts());
+        partTableView2.setItems(this.associatedParts);
         partIdTable2Column.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameTable2Column.setCellValueFactory(new PropertyValueFactory<>("name"));
         inventoryLevelTable2Column.setCellValueFactory(new PropertyValueFactory<>("stock"));
         pricePerUnitTable2Column.setCellValueFactory(new PropertyValueFactory<>("price"));
+    }
+
+    /**
+     *
+     * @param actionEvent
+     */
+    public void addAssociatedPart(ActionEvent actionEvent) {
+        Part partSelected = (Part) partTableView1.getSelectionModel().getSelectedItem();
+
+        if (partSelected == null) {
+            return;
+        }
+
+        // Remove selectedPart from top TableView (All Parts)
+        allParts.remove(partSelected);
+
+        // Move selectedPart to bottom TableView (Associated Parts)
+        associatedParts.add(partSelected);
+    }
+
+    public void removeAssociatedPart(ActionEvent actionEvent) {
+        Part partSelected = (Part) partTableView2.getSelectionModel().getSelectedItem();
+
+        if (partSelected == null) {
+            return;
+        }
+
+        // Remove the selected, associated part from the bottom TableView (Associated Parts)
+        associatedParts.remove(partSelected);
+
+        // Add the selectedPart back to the top TableView (All Parts)
+        allParts.add(partSelected);
     }
 
     /**
