@@ -1,5 +1,6 @@
 package demo.controller;
 
+import demo.model.Inventory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,6 +18,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ModifyProductController implements Initializable {
+
+    private Inventory inventory;
+
     public TextField nameTextField;
     public TextField idTextField;
     public TextField inventoryTextField;
@@ -41,6 +45,10 @@ public class ModifyProductController implements Initializable {
     public Button removeAssociatedPartButton;
     public Button saveProductButton;
     public Button cancelProductButton;
+
+    public ModifyProductController(Inventory inventory) {
+        this.inventory = inventory;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) { }

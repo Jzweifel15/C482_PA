@@ -146,7 +146,11 @@ public class MainController implements Initializable {
      * @throws IOException when the getResource method cannot find the fxml file to transition back to
      */
     public void onModifyProductClicked(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/demo/view/modify-product-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/modify-product-view.fxml"));
+        ModifyProductController controller = new ModifyProductController(this.inventory);
+        fxmlLoader.setController(controller);
+
+        Parent root = fxmlLoader.load();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 600);
         stage.setTitle("Modify Product");
