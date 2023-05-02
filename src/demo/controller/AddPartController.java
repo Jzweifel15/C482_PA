@@ -5,7 +5,6 @@ import demo.model.Inventory;
 import demo.model.Outsourced;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,11 +14,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Random;
-import java.util.ResourceBundle;
 
-public class AddPartController implements Initializable {
+public class AddPartController {
 
     public Inventory inventory;
     public AnchorPane addPartFormPane;
@@ -36,16 +33,17 @@ public class AddPartController implements Initializable {
     public Button CancelPartButton;
     public Label machineIdOrCompanyNameLabel;
 
+    /**
+     * Constructor for the Add Part Controller
+     * @param inventory the current state of the inventory
+     */
     public AddPartController(Inventory inventory) {
         this.inventory = new Inventory();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) { }
-
     /**
-     * The action event that is triggered when the user tries to save a new Part
-     * @param actionEvent an event Object
+     * Saves the new Part and transitions back to the Main View
+     * @param actionEvent an ActionEvent Object
      */
     public void savePartButton(ActionEvent actionEvent) throws IOException {
         int id = generateRandomId();
@@ -113,8 +111,8 @@ public class AddPartController implements Initializable {
     }
 
     /**
-     * Cancels the Add Part request and transitions back to the Main Form
-     * @param actionEvent an action event object
+     * Cancels the Add Part request and transitions back to the Main View
+     * @param actionEvent an ActionEvent object
      * @throws IOException when the getResource method cannot find the fxml file to transition back to
      */
     public void onCancel(ActionEvent actionEvent) throws IOException {
@@ -132,14 +130,26 @@ public class AddPartController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Sets the text of the Machine ID label when the In House radio button is selected
+     * @param mouseEvent a MouseEvent object
+     */
     public void inHouseSelected(MouseEvent mouseEvent) {
         machineIdOrCompanyNameLabel.setText("Machine ID");
     }
 
+    /**
+     * Sets the text of the Company Name label when the Outsourced radio button is selected
+     * @param mouseEvent a MouseEvent object
+     */
     public void outsourcedSelected(MouseEvent mouseEvent) {
         machineIdOrCompanyNameLabel.setText("Company Name");
     }
 
+    /**
+     * Generates a random ID for the new Part
+     * @return the random ID
+     */
     public int generateRandomId() {
         Random rand = new Random();
         Integer randNum = rand.nextInt(100);
