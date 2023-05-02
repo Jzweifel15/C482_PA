@@ -162,7 +162,7 @@ public class ModifyPartController implements Initializable {
 
     /**
      * Sets the text of the Machine ID label when the In House radio button is selected
-     * @param mouseEvent a mouse event object
+     * @param mouseEvent a MouseEvent object
      */
     public void inHouseSelected(MouseEvent mouseEvent) {
         machineIdOrCompanyNameLabel.setText("Machine ID");
@@ -170,7 +170,7 @@ public class ModifyPartController implements Initializable {
 
     /**
      * Sets the text of the Company Name label when the Outsourced radio button is selected
-     * @param mouseEvent a mouse event object
+     * @param mouseEvent a MouseEvent object
      */
     public void outsourcedSelected(MouseEvent mouseEvent) {
         machineIdOrCompanyNameLabel.setText("Company Name");
