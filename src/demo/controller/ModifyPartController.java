@@ -37,11 +37,21 @@ public class ModifyPartController implements Initializable {
     public Button savePartButton;
     public Button CancelPartButton;
 
+    /**
+     * Constructor for the Modify Part Controller
+     * @param inventory the current state of the inventory
+     * @param part the selected Part instance to be modified
+     */
     public ModifyPartController(Inventory inventory, Part part) {
         this.inventory = inventory;
         this.part = part;
     }
 
+    /**
+     * Check the type (InHouse or Outsourced) that the selected Part is, then set the TextFields with their respective, corresponding data
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (this.part instanceof InHouse) {
@@ -70,6 +80,11 @@ public class ModifyPartController implements Initializable {
         }
     }
 
+    /**
+     * Save changes made to the selected Part instance and transition back to the Main View
+     * @param actionEvent an ActionEvent object
+     * @throws IOException when the getResource method cannot find the fxml file to transition back to
+     */
     public void saveModificationToPart(ActionEvent actionEvent) throws IOException {
         int index = this.inventory.getAllParts().indexOf(this.part);
         int id;
@@ -121,11 +136,16 @@ public class ModifyPartController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Error Modifying Part");
-            alert.setContentText("We ran into an issue trying when performing your Part modification request. Please verify that all fields are filled in correctly and try again.");
+            alert.setContentText("We ran into an issue while performing your Part modification request. Please verify that all fields are filled in correctly and try again.");
             alert.showAndWait();
         }
     }
 
+    /**
+     * Cancel changes made to the selected Part instance and transition back to Main View
+     * @param actionEvent an action event object
+     * @throws IOException when the getResource method cannot find the fxml file to transition back to
+     */
     public void onCancel(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/main-view.fxml"));
         MainController controller = new MainController(this.inventory);
@@ -140,10 +160,18 @@ public class ModifyPartController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Sets the text of the Machine ID label when the In House radio button is selected
+     * @param mouseEvent a mouse event object
+     */
     public void inHouseSelected(MouseEvent mouseEvent) {
         machineIdOrCompanyNameLabel.setText("Machine ID");
     }
 
+    /**
+     * Sets the text of the Company Name label when the Outsourced radio button is selected
+     * @param mouseEvent a mouse event object
+     */
     public void outsourcedSelected(MouseEvent mouseEvent) {
         machineIdOrCompanyNameLabel.setText("Company Name");
     }
