@@ -11,10 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -146,6 +143,13 @@ public class ModifyProductController implements Initializable {
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error Modifying Product");
+            alert.setContentText("We ran into an issue while performing your Product modification request. Please verify that all fields are filled in correctly and try again.");
+            alert.showAndWait();
         }
     }
 
