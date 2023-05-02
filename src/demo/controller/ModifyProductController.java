@@ -1,6 +1,7 @@
 package demo.controller;
 
 import demo.model.Inventory;
+import demo.model.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,6 +21,7 @@ import java.util.ResourceBundle;
 public class ModifyProductController implements Initializable {
 
     private Inventory inventory;
+    private Product product;
 
     public TextField nameTextField;
     public TextField idTextField;
@@ -46,12 +48,15 @@ public class ModifyProductController implements Initializable {
     public Button saveProductButton;
     public Button cancelProductButton;
 
-    public ModifyProductController(Inventory inventory) {
+    public ModifyProductController(Inventory inventory, Product product) {
         this.inventory = inventory;
+        this.product = product;
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) { }
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println(this.product.toString());
+    }
 
     /**
      * Cancels the Add Product request and transitions back to the Main Form

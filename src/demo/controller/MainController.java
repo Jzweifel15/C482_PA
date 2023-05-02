@@ -2,6 +2,7 @@ package demo.controller;
 
 import demo.model.Inventory;
 import demo.model.Part;
+import demo.model.Product;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -146,8 +147,10 @@ public class MainController implements Initializable {
      * @throws IOException when the getResource method cannot find the fxml file to transition back to
      */
     public void onModifyProductClicked(ActionEvent actionEvent) throws IOException {
+        Product productSelected = (Product) productsTableView.getSelectionModel().getSelectedItem();
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/modify-product-view.fxml"));
-        ModifyProductController controller = new ModifyProductController(this.inventory);
+        ModifyProductController controller = new ModifyProductController(this.inventory, productSelected);
         fxmlLoader.setController(controller);
 
         Parent root = fxmlLoader.load();
