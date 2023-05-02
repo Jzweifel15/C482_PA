@@ -149,6 +149,10 @@ public class MainController implements Initializable {
     public void onModifyProductClicked(ActionEvent actionEvent) throws IOException {
         Product productSelected = (Product) productsTableView.getSelectionModel().getSelectedItem();
 
+        if (productSelected == null) {
+            return;
+        }
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/modify-product-view.fxml"));
         ModifyProductController controller = new ModifyProductController(this.inventory, productSelected);
         fxmlLoader.setController(controller);
