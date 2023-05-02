@@ -32,7 +32,7 @@ public class ModifyProductController implements Initializable {
     public TextField nameTextField;
     public TextField idTextField;
     public TextField inventoryTextField;
-    public TextField PriceCostTextField;
+    public TextField priceCostTextField;
     public TextField maxTextField;
     public TextField searchPartTextField;
     public TextField minTextField;
@@ -76,7 +76,7 @@ public class ModifyProductController implements Initializable {
         idTextField.setText(Integer.toString(this.product.getId()));
         nameTextField.setText(this.product.getName());
         inventoryTextField.setText(Integer.toString(this.product.getStock()));
-        PriceCostTextField.setText(Double.toString(this.product.getPrice()));
+        priceCostTextField.setText(Double.toString(this.product.getPrice()));
         maxTextField.setText(Integer.toString(this.product.getMax()));
         minTextField.setText(Integer.toString(this.product.getMin()));
 
@@ -91,6 +91,62 @@ public class ModifyProductController implements Initializable {
         partNameTable2Column.setCellValueFactory(new PropertyValueFactory<>("name"));
         inventoryLevelTable2Column.setCellValueFactory(new PropertyValueFactory<>("stock"));
         pricePerUnitTable2Column.setCellValueFactory(new PropertyValueFactory<>("price"));
+    }
+
+    /**
+     * Save changes made to the Product instance and transition back to the Main View
+     * @param actionEvent
+     * @throws IOException
+     */
+    public void saveProduct(ActionEvent actionEvent) throws IOException {
+        int index = this.inventory.getAllProducts().indexOf(this.product);
+        int id;
+        String name;
+        int inv;
+        double priceCost;
+        int max;
+        int min;
+
+        if (!(nameTextField.getText().isEmpty()) && !(inventoryTextField.getText().isEmpty()) &&
+                !(priceCostTextField.getText().isEmpty()) && !(maxTextField.getText().isEmpty()) &&
+                !(minTextField.getText().isEmpty())) {
+
+            // Set variables to their respective TextField values
+            id = Integer.parseInt(idTextField.getText());
+            name = nameTextField.getText();
+            inv = Integer.parseInt(inventoryTextField.getText());
+            priceCost = Double.parseDouble(priceCostTextField.getText());
+            max = Integer.parseInt(maxTextField.getText());
+            min = Integer.parseInt(minTextField.getText());
+
+            Product updatedProduct = new Product(id, name, priceCost, inv, min, max);
+
+            for (Part associatedPart : this.associatedParts) {
+                updatedProduct.addAssociatedPart(associatedPart);
+            }
+
+            inventory.updateProduct(index, updatedProduct);
+
+            // Clear all TextFields before transitioning back to Main View
+            nameTextField.clear();
+            inventoryTextField.clear();
+            priceCostTextField.clear();
+            maxTextField.clear();
+            minTextField.clear();
+
+            // Transition back to Main View
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/main-view.fxml"));
+            MainController controller = new MainController(this.inventory);
+            fxmlLoader.setController(controller);
+
+            Parent root = fxmlLoader.load();
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 900, 400);
+            stage.setTitle("Inventory Management System!");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        }
     }
 
     /**

@@ -9,7 +9,7 @@ import javafx.collections.FXCollections;
 public class Inventory {
 
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
-    private ObservableList<Product> allProducts = FXCollections.observableArrayList();
+    private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
     // Constructor
     public Inventory() { }
@@ -103,10 +103,15 @@ public class Inventory {
 
     /**
      * @param index
-     * @param newProduct
+     * @param selectedProduct
      */
-    public void updateProduct(int index, Product newProduct) {
-
+    public void updateProduct(int index, Product selectedProduct) {
+        for (Product p : Inventory.allProducts) {
+            if (allProducts.get(index).getId() == selectedProduct.getId()) {
+                allProducts.set(index, selectedProduct);
+                break;
+            }
+        }
     }
 
 //    /**
