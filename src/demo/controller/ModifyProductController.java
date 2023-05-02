@@ -1,7 +1,10 @@
 package demo.controller;
 
 import demo.model.Inventory;
+import demo.model.Part;
 import demo.model.Product;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,6 +26,7 @@ public class ModifyProductController implements Initializable {
 
     private Inventory inventory;
     private Product product;
+    private ObservableList<Part> allParts;
 
     public TextField nameTextField;
     public TextField idTextField;
@@ -51,11 +56,40 @@ public class ModifyProductController implements Initializable {
     public ModifyProductController(Inventory inventory, Product product) {
         this.inventory = inventory;
         this.product = product;
-    }
+
+        // Add the remaining Parts that are not associated with the passed Product
+        // instance to the allParts List for the top TableView (All Parts)
+        this.allParts = FXCollections.observableArrayList(inventory.getAllParts());
+        for (int i = 0; i < allParts.size(); i++) {
+            for (int j = 0; j < product.getAssociatedParts().size(); j++) {
+                if (product.getAssociatedParts().get(j).getId() == allParts.get(i).getId()) {
+                    allParts.remove(product.getAssociatedParts().get(j));
+                }
+            }
+        }
+
+     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println(this.product.toString());
+        idTextField.setText(Integer.toString(this.product.getId()));
+        nameTextField.setText(this.product.getName());
+        inventoryTextField.setText(Integer.toString(this.product.getStock()));
+        PriceCostTextField.setText(Double.toString(this.product.getPrice()));
+        maxTextField.setText(Integer.toString(this.product.getMax()));
+        minTextField.setText(Integer.toString(this.product.getMin()));
+
+        partTableView1.setItems(this.allParts);
+        partIdTable1Column.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameTable1Column.setCellValueFactory(new PropertyValueFactory<>("name"));
+        inventoryLevelTable1Column.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        pricePerUnitTable1Column.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        partTableView2.setItems(this.product.getAssociatedParts());
+        partIdTable2Column.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameTable2Column.setCellValueFactory(new PropertyValueFactory<>("name"));
+        inventoryLevelTable2Column.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        pricePerUnitTable2Column.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
     /**
