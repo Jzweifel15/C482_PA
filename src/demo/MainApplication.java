@@ -31,6 +31,8 @@ public class MainApplication extends Application {
         //Add InHouse Parts
         Part part1 = new InHouse(1, "Part A", 2.99, 10, 5, 100, 101);
         Part part2 = new InHouse(3, "Part B", 4.99, 11, 5, 100, 102);
+        inventory.addPart(part1);
+        inventory.addPart(part2);
         inventory.addPart(new InHouse(2, "Part C", 3.99, 9, 5, 100, 103));
         inventory.addPart(new InHouse(4, "Part D", 5.99, 15, 5, 100, 104));
         inventory.addPart(new InHouse(5, "Part E", 6.99, 5, 5, 100, 105));
@@ -38,6 +40,8 @@ public class MainApplication extends Application {
         //Add OutSourced Parts
         Part part3 = new Outsourced(6, "Part F", 2.99, 10, 5, 100, "Bob's Burgers");
         Part part4 = new Outsourced(7, "Part G", 3.99, 9, 5, 100, "Amazon LLC");
+        inventory.addPart(part3);
+        inventory.addPart(part4);
         inventory.addPart(new Outsourced(8, "Part H", 2.99, 10, 5, 100, "The Broken Stool"));
         inventory.addPart(new Outsourced(9, "Part I", 2.99, 10, 5, 100, "Amazon LLC"));
         inventory.addPart(new Outsourced(10, "Part J", 2.99, 10, 5, 100, "The Drunken Clam"));
