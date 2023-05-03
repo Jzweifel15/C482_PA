@@ -141,7 +141,7 @@ public class MainController implements Initializable {
         alert.setTitle("Delete Part");
         alert.setHeaderText("Are you sure you want to delete " + partSelected.getName() + "? If this part is \n" +
                                 " is associated with a product, then it will no longer be associated.");
-        alert.setContentText("Click ok to confirm");
+        alert.setContentText("Click OK to confirm");
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
@@ -224,7 +224,7 @@ public class MainController implements Initializable {
         else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete Product");
-            alert.setHeaderText("Are you sure you want to delete: " + productSelected.getName());
+            alert.setHeaderText("Are you sure you want to delete " + productSelected.getName() + "?");
             alert.setContentText("Click OK to confirm");
 
             Optional<ButtonType> result = alert.showAndWait();
