@@ -69,6 +69,8 @@ public class AddProductController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        generateRandomId();
+
         // Add all Parts in inventory to the top TableView
         partTableView1.setItems(this.allParts);
         partIdTable1Column.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -90,7 +92,7 @@ public class AddProductController implements Initializable {
      * @throws IOException when the getResource method cannot find the fxml file to transition back to
      */
     public void saveProduct (ActionEvent actionEvent) throws IOException {
-        int id = generateRandomId();
+        int id;
         String name;
         int inv;
         double priceCost;
@@ -104,6 +106,7 @@ public class AddProductController implements Initializable {
                 !(minTextField.getText().isEmpty())) {
 
             // Set variables to their respective TextField values
+            id = Integer.parseInt(idTextField.getText());
             name = nameTextField.getText();
             inv = Integer.parseInt(inventoryTextField.getText());
             priceCost = Double.parseDouble(priceCostTextField.getText());
@@ -208,10 +211,15 @@ public class AddProductController implements Initializable {
      * Generates a random ID for the new Product
      * @return the random ID
      */
-    public int generateRandomId() {
-        Random rand = new Random();
-        Integer randNum = rand.nextInt(100);
+    private void generateRandomId() {
+        Random randomNum = new Random();
+        Integer num = randomNum.nextInt(1000);
 
-        return randNum;
+        if (this.inventory.getAllProducts().size() == 0 || this.inventory.lookupProduct(num) == null) {
+            idTextField.setText(num.toString());
+        }
+        else {
+            generateRandomId();
+        }
     }
 }
