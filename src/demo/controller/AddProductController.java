@@ -47,11 +47,6 @@ public class AddProductController implements Initializable {
     public TableColumn inventoryLevelTable2Column;
     public TableColumn pricePerUnitTable2Column;
 
-    public Button addAssociatedPartButton;
-    public Button removeAssociatedPartButton;
-    public Button saveProductButton;
-    public Button cancelProductButton;
-
     /**
      * Constructor for the Add Product Controller
      * @param inventory the current state of the inventory

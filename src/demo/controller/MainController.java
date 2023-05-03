@@ -14,9 +14,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,19 +25,12 @@ public class MainController implements Initializable {
 
     public Inventory inventory;
 
-    public AnchorPane mainFormPane;
-    public Pane partsPane;
-    public Pane productsPane;
-
     // Parts Table, its repsective columns, and its associated controls
     public TableView partsTableView;
     public TableColumn partIdColumn;
     public TableColumn partNameColumn;
     public TableColumn partInventoryLevelColumn;
     public TableColumn partPricePerUnitColumn;
-    public Button partAddButton;
-    public Button partModifyButton;
-    public Button partDeleteButton;
     public TextField partSearchField;
 
     // Products Table, its respective columns, and its associated controls
@@ -49,13 +39,7 @@ public class MainController implements Initializable {
     public TableColumn productNameColumn;
     public TableColumn productInventoryLevelColumn;
     public TableColumn productPricePerUnitColumn;
-    public Button productAddButton;
-    public Button productModifyButton;
-    public Button productDeleteButton;
     public TextField productSearchField;
-
-    // Exit Main Form (quits the program)
-    public Button mainFormExitButton;
 
     public MainController() {
         Inventory inventory = new Inventory();

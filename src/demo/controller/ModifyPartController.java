@@ -32,10 +32,7 @@ public class ModifyPartController implements Initializable {
     public TextField maxTextField;
     public Label machineIdOrCompanyNameLabel;
     public TextField machineIdOrCompanyNameTextField;
-    public Label minLabel;
     public TextField minTextField;
-    public Button savePartButton;
-    public Button CancelPartButton;
 
     /**
      * Constructor for the Modify Part Controller

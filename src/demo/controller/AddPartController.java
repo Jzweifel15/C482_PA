@@ -11,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,8 +21,7 @@ import java.util.ResourceBundle;
 public class AddPartController implements Initializable {
 
     public Inventory inventory;
-    public AnchorPane addPartFormPane;
-    public RadioButton inHouseRadioButton;      // isSelected() is the method used for checking if a radio button is selected
+    public RadioButton inHouseRadioButton;
     public RadioButton outsourcedRadioButton;
     public TextField idTextField;
     public TextField nameTextField;
@@ -32,8 +30,6 @@ public class AddPartController implements Initializable {
     public TextField maxTextField;
     public TextField machineIdOrCompanyNameTextField;
     public TextField minTextField;
-    public Button savePartButton;
-    public Button CancelPartButton;
     public Label machineIdOrCompanyNameLabel;
 
     /**
@@ -196,5 +192,4 @@ public class AddPartController implements Initializable {
             generateRandomId();
         }
     }
-
 }
