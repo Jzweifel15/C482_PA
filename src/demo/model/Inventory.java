@@ -152,13 +152,20 @@ public class Inventory {
         }
     }
 
-//    /**
-//     * @param selectedPart the part trying to be deleted from inventory
-//     * @return true if the supplied Part was deleted; false if not found
-//     */
-//    public boolean deletePart(Part selectedPart) {
-//
-//    }
+    /**
+     * @param selectedPart the part trying to be deleted from inventory
+     * @return true if the supplied Part was deleted; false if not found
+     */
+    public static boolean deletePart(Part selectedPart) {
+        for (Part part : Inventory.allParts) {
+            if (part.getId() == selectedPart.getId()) {
+                allParts.remove(part);
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 //    /**
 //     *
