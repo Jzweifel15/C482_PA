@@ -193,6 +193,38 @@ public class MainController implements Initializable {
     }
 
     /**
+     * Deletes the selected Product from Inventory, only if the Product instance does not
+     * have any remaining associated parts
+     * @param actionEvent an ActionEvent object
+     */
+    public void onDeleteProductClicked(ActionEvent actionEvent) {
+        Product productSelected = (Product) productsTableView.getSelectionModel().getSelectedItem();
+
+        if (productSelected == null) {
+            return;
+        }
+        else if (!(productSelected.getAssociatedParts().isEmpty())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error Trying to Delete Product");
+            alert.setContentText("Cannot delete the selected product because it currently still has parts " +
+                                    "associated with it.");
+            alert.showAndWait();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Product");
+            alert.setHeaderText("Are you sure you want to delete: " + productSelected.getName());
+            alert.setContentText("Click OK to confirm");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                boolean deleted = Inventory.deleteProduct(productSelected);
+            }
+        }
+    }
+
+    /**
      * Searches for the Part by its name or for the supplied Part ID
      * @param actionEvent an ActionEvent object
      */

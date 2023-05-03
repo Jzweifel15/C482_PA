@@ -159,7 +159,7 @@ public class Inventory {
     public static boolean deletePart(Part selectedPart) {
         for (Part part : Inventory.allParts) {
             if (part.getId() == selectedPart.getId()) {
-                allParts.remove(part);
+                Inventory.allParts.remove(part);
                 return true;
             }
         }
@@ -167,13 +167,20 @@ public class Inventory {
         return false;
     }
 
-//    /**
-//     *
-//     * @param selectedProduct the product trying to be deleted from inventory
-//     * @return true if the supplied Product was deleted; false if not found
-//     */
-//    public boolean deleteProduct(Product selectedProduct) {
-//
-//    }
+    /**
+     *
+     * @param selectedProduct the product trying to be deleted from inventory
+     * @return true if the supplied Product was deleted; false if not found
+     */
+    public static boolean deleteProduct(Product selectedProduct) {
+        for (Product product : Inventory.allProducts) {
+            if (product.getId() == selectedProduct.getId()) {
+                Inventory.allProducts.remove(product);
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 }
