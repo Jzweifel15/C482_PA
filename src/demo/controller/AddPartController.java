@@ -5,6 +5,7 @@ import demo.model.Inventory;
 import demo.model.Outsourced;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,9 +15,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Random;
+import java.util.ResourceBundle;
 
-public class AddPartController {
+public class AddPartController implements Initializable {
 
     public Inventory inventory;
     public AnchorPane addPartFormPane;
@@ -41,12 +44,17 @@ public class AddPartController {
         this.inventory = new Inventory();
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        generateRandomId();
+    }
+
     /**
      * Saves the new Part and transitions back to the Main View
      * @param actionEvent an ActionEvent Object
      */
     public void savePartButton(ActionEvent actionEvent) throws IOException {
-        int id = generateRandomId();
+        int id;
         String name;
         int inv;
         double priceCost;
@@ -60,6 +68,7 @@ public class AddPartController {
                 !(minTextField.getText().isEmpty()) && !(machineIdOrCompanyNameTextField.getText().isEmpty())) {
 
             // Set variables to their respective TextField values
+            id = Integer.parseInt(idTextField.getText());
             name = nameTextField.getText();
             inv = Integer.parseInt(inventoryTextField.getText());
             priceCost = Double.parseDouble(priceCostTextField.getText());
@@ -150,11 +159,16 @@ public class AddPartController {
      * Generates a random ID for the new Part
      * @return the random ID
      */
-    public int generateRandomId() {
-        Random rand = new Random();
-        Integer randNum = rand.nextInt(100);
+    private void generateRandomId() {
+        Random randomNum = new Random();
+        Integer num = randomNum.nextInt(1000);
 
-        return randNum;
+        if (this.inventory.getAllParts().size() == 0 || this.inventory.lookupPart(num) == null) {
+            idTextField.setText(num.toString());
+        }
+        else {
+            generateRandomId();
+        }
     }
 
 }
