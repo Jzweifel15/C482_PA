@@ -132,7 +132,7 @@ public class AddPartController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("Error Adding New Part");
-                alert.setContentText("We ran into an issue trying to add your new part request. Please verify that all fields are filled in and try again.");
+                alert.setContentText("We ran into an issue trying to add your new part request. Please verify that all fields are filled in correctly");
                 alert.showAndWait();
             }
         }
