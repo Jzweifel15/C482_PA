@@ -163,11 +163,47 @@ public class AddProductController implements Initializable {
             return;
         }
 
+        if (!(searchPartTextField.getText().equals(""))) {
+            searchPartTextField.clear();
+        }
+
         // Remove selectedPart from top TableView (All Parts)
         allParts.remove(partSelected);
 
         // Move selectedPart to bottom TableView (Associated Parts)
         associatedParts.add(partSelected);
+
+        partTableView1.refresh();
+    }
+
+    /**
+     * Searches for the Part by its name or for the supplied Part ID
+     * @param actionEvent an ActionEvent object
+     */
+    public void searchForPart(ActionEvent actionEvent) {
+        String input = searchPartTextField.getText();
+
+        ObservableList<Part> parts = this.inventory.lookupPart(input);
+
+        // Check if no Part was added to list through a partial/full name. If empty, then maybe user
+        // typed in a ID no., so search based on that argument
+        if (parts.size() == 0) {
+            try {
+                int id = Integer.parseInt(input);
+                Part part = inventory.lookupPart(id);
+
+                if (part != null) {
+                    parts.add(part);
+                }
+            }
+            catch (NumberFormatException e) {
+                // ignore for now...
+            }
+        }
+
+        // Show the returned results in the TableView
+        partTableView1.setItems(parts);
+        partTableView1.refresh();
     }
 
     /**

@@ -29,7 +29,7 @@
                 <TableColumn fx:id="pricePerUnitTable1Column" prefWidth="98.0" text="Price per Unit" />
             </columns>
         </TableView>
-        <TextField fx:id="searchPartTextField" layoutX="683.0" layoutY="31.0" prefHeight="25.0" prefWidth="190.0" promptText="Search by Part ID or Name" />
+        <TextField fx:id="searchPartTextField" layoutX="631.0" layoutY="31.0" prefHeight="25.0" prefWidth="190.0" promptText="Search by Part ID or Name" />
         <TableView fx:id="partTableView2" layoutX="488.0" layoutY="313.0" prefHeight="180.0" prefWidth="390.0">
             <columns>
                 <TableColumn fx:id="partIdTable2Column" prefWidth="59.0" text="Part ID" />
@@ -44,5 +44,6 @@
         <Button fx:id="removeAssociatedPartButton" layoutX="697.0" layoutY="510.0" mnemonicParsing="false" onAction="#removeAssociatedPart" text="Remove Associated Part" />
         <Button fx:id="saveProductButton" layoutX="697.0" layoutY="547.0" mnemonicParsing="false" onAction="#saveProduct" text="Save" />
         <Button fx:id="cancelProductButton" layoutX="793.0" layoutY="547.0" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
+      <Button fx:id="searchPartsButton" layoutX="821.0" layoutY="31.0" mnemonicParsing="false" onAction="#searchForPart" text="Search" />
     </children>
 </AnchorPane>
