@@ -100,73 +100,77 @@ public class AddProductController implements Initializable {
                 !(priceCostTextField.getText().isEmpty()) && !(maxTextField.getText().isEmpty()) &&
                 !(minTextField.getText().isEmpty())) {
 
-            // Set variables to their respective TextField values
-            id = Integer.parseInt(idTextField.getText());
-            name = nameTextField.getText();
-            inv = Integer.parseInt(inventoryTextField.getText());
-            priceCost = Double.parseDouble(priceCostTextField.getText());
-            max = Integer.parseInt(maxTextField.getText());
-            min = Integer.parseInt(minTextField.getText());
+            try {
+                // Set variables to their respective TextField values
+                id = Integer.parseInt(idTextField.getText());
+                name = nameTextField.getText();
+                inv = Integer.parseInt(inventoryTextField.getText());
+                priceCost = Double.parseDouble(priceCostTextField.getText());
+                max = Integer.parseInt(maxTextField.getText());
+                min = Integer.parseInt(minTextField.getText());
 
-            if (inv > max) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error Adding New Product");
-                alert.setContentText("The total number in inventory cannot exceed the upper bound (max) allowed in inventory");
-                alert.showAndWait();
-            }
-            else if (inv < min) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error Adding New Product");
-                alert.setContentText("The total number in inventory cannot be less than the lower bound (min) allowed in inventory");
-                alert.showAndWait();
-            }
-            else if (min == max) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error Adding New Product");
-                alert.setContentText("The upper bound and lower bound allowed in inventory cannot be the same");
-                alert.showAndWait();
-            }
-            else if (min > max) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error Adding New Product");
-                alert.setContentText("The lower bound allowed in inventory cannot exceed the upper bound");
-                alert.showAndWait();
-            }
-            else if (max < min) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error Adding New Product");
-                alert.setContentText("The upper bound allowed in inventory cannot be less than the lower bound");
-                alert.showAndWait();
-            }
-            else {
-                // Create a new Product instance
-                newProduct = new Product(id, name, priceCost, inv, min, max);
+                if (inv > max) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Error Adding New Product");
+                    alert.setContentText("The total number in inventory cannot exceed the upper bound (max) allowed in inventory");
+                    alert.showAndWait();
+                } else if (inv < min) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Error Adding New Product");
+                    alert.setContentText("The total number in inventory cannot be less than the lower bound (min) allowed in inventory");
+                    alert.showAndWait();
+                } else if (min == max) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Error Adding New Product");
+                    alert.setContentText("The upper bound and lower bound allowed in inventory cannot be the same");
+                    alert.showAndWait();
+                } else if (min > max) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Error Adding New Product");
+                    alert.setContentText("The lower bound allowed in inventory cannot exceed the upper bound");
+                    alert.showAndWait();
+                } else if (max < min) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Error Adding New Product");
+                    alert.setContentText("The upper bound allowed in inventory cannot be less than the lower bound");
+                    alert.showAndWait();
+                } else {
+                    // Create a new Product instance
+                    newProduct = new Product(id, name, priceCost, inv, min, max);
 
-                // Add all the selected associated parts to the new Product's list of associated parts
-                for (Part associatedPart : this.associatedParts) {
-                    newProduct.addAssociatedPart(associatedPart);
+                    // Add all the selected associated parts to the new Product's list of associated parts
+                    for (Part associatedPart : this.associatedParts) {
+                        newProduct.addAssociatedPart(associatedPart);
+                    }
+
+                    // Add the new Product to inventory
+                    inventory.addProduct(newProduct);
+
+                    // Transition back to Main View
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/main-view.fxml"));
+                    MainController controller = new MainController(this.inventory);
+                    fxmlLoader.setController(controller);
+
+                    Parent root = fxmlLoader.load();
+                    Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                    Scene scene = new Scene(root, 900, 400);
+                    stage.setTitle("Inventory Management System!");
+                    stage.setScene(scene);
+                    stage.setResizable(false);
+                    stage.show();
                 }
-
-                // Add the new Product to inventory
-                inventory.addProduct(newProduct);
-
-                // Transition back to Main View
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/main-view.fxml"));
-                MainController controller = new MainController(this.inventory);
-                fxmlLoader.setController(controller);
-
-                Parent root = fxmlLoader.load();
-                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root, 900, 400);
-                stage.setTitle("Inventory Management System!");
-                stage.setScene(scene);
-                stage.setResizable(false);
-                stage.show();
+            }
+            catch (NumberFormatException ex) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error Adding New Product");
+                alert.setContentText("We ran into an issue trying to add your new product request. Please verify that all fields are filled in correctly and try again.");
+                alert.showAndWait();
             }
         }
         else {
