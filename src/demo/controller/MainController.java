@@ -139,12 +139,22 @@ public class MainController implements Initializable {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Delete Part");
-        alert.setHeaderText("Are you sure you want to delete: " + partSelected.getName());
+        alert.setHeaderText("Are you sure you want to delete " + partSelected.getName() + "? If this part is \n" +
+                                " is associated with a product, then it will no longer be associated.");
         alert.setContentText("Click ok to confirm");
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            boolean deleted = Inventory.deletePart(partSelected);
+            for (Product product : this.inventory.getAllProducts()) {
+                for (Part associatedPart : product.getAssociatedParts()) {
+                    if (associatedPart.getId() == partSelected.getId()) {
+                        product.deleteAssociatedPart(partSelected);
+                        break;
+                    }
+                }
+            }
+
+            Inventory.deletePart(partSelected);
         }
     }
 
