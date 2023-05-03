@@ -109,28 +109,65 @@ public class ModifyPartController implements Initializable {
             min = Integer.parseInt(minTextField.getText());
             machineIdOrCompanyName = machineIdOrCompanyNameTextField.getText();
 
-            // Check which radio button is chosen, then add the part in accordance to the chosen radio button
-            if (inHouseRadioButton.isSelected()) {
-                InHouse inHouse = new InHouse(id, name, priceCost, inv, min, max, Integer.parseInt(machineIdOrCompanyName));
-                inventory.updatePart(index, inHouse);
+            if (inv > max) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error Adding New Part");
+                alert.setContentText("The total number in inventory cannot exceed the upper bound (max) allowed in inventory");
+                alert.showAndWait();
             }
-            else if (outsourcedRadioButton.isSelected()) {
-                Outsourced outsourced = new Outsourced(id, name, priceCost, inv, min, max, machineIdOrCompanyName);
-                inventory.updatePart(index, outsourced);
+            else if (inv < min) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error Adding New Part");
+                alert.setContentText("The total number in inventory cannot be less than the lower bound (min) allowed in inventory");
+                alert.showAndWait();
             }
+            else if (min == max) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error Adding New Part");
+                alert.setContentText("The upper bound and lower bound allowed in inventory cannot be the same");
+                alert.showAndWait();
+            }
+            else if (min > max) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error Adding New Part");
+                alert.setContentText("The lower bound allowed in inventory cannot exceed the upper bound");
+                alert.showAndWait();
+            }
+            else if (max < min) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error Adding New Part");
+                alert.setContentText("The upper bound allowed in inventory cannot be less than the lower bound");
+                alert.showAndWait();
+            }
+            else {
 
-            // Transition back to Main View
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/main-view.fxml"));
-            MainController controller = new MainController(this.inventory);
-            fxmlLoader.setController(controller);
+                // Check which radio button is chosen, then add the part in accordance to the chosen radio button
+                if (inHouseRadioButton.isSelected()) {
+                    InHouse inHouse = new InHouse(id, name, priceCost, inv, min, max, Integer.parseInt(machineIdOrCompanyName));
+                    inventory.updatePart(index, inHouse);
+                } else if (outsourcedRadioButton.isSelected()) {
+                    Outsourced outsourced = new Outsourced(id, name, priceCost, inv, min, max, machineIdOrCompanyName);
+                    inventory.updatePart(index, outsourced);
+                }
 
-            Parent root = fxmlLoader.load();
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root, 900, 400);
-            stage.setTitle("Inventory Management System!");
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.show();
+                // Transition back to Main View
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/main-view.fxml"));
+                MainController controller = new MainController(this.inventory);
+                fxmlLoader.setController(controller);
+
+                Parent root = fxmlLoader.load();
+                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root, 900, 400);
+                stage.setTitle("Inventory Management System!");
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+            }
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
