@@ -11,6 +11,20 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainApplication extends Application {
+
+    /**
+     * RUNTIME ERROR ENCOUNTERED: The biggest issue I encountered for this project was trying to figure out how to pass
+     * data between the different views/windows, which originally started in this first, main application file. I had
+     * originally added the 'fx:controller' options in my fxml files, but while doing this, I could not find a sufficient
+     * way to pass the data back and forth. The one option I could logically think to do, was to pass the data to each
+     * Controller class through their constructor, then transition to the respective view that was trying to be accessed
+     * via one of the form buttons. While doing this, I did not delete the 'fx:controller' option in the fxml file, which
+     * then generated a runtime error stating that the "Controller was already set" (or, something along those lines).
+     * Therefore, to fix this error, I deleted the 'fx:controller' option from each fxml file and I was able to transition
+     * between each view normally and pass the necessary data via the constructors.
+     * @param stage a Stage object
+     * @throws IOException when the getResource method cannot find the supplied fxml file to transition to
+     */
     @Override
     public void start(Stage stage) throws IOException {
         Inventory inventory = new Inventory();
@@ -58,6 +72,17 @@ public class MainApplication extends Application {
         inventory.addProduct(product2);
     }
 
+    /**
+     * RUNTIME ERROR ENCOUNTERED: This comment can be found in the MainApplication class (this file), for the start method
+     *
+     * FUTURE ENHANCEMENT: A future enhancement that I would make to this application would be to add the functionality to
+     * automatically update a TableView when the user is typing in either of the search fields, instead of performing the
+     * search on the click of a button. For example, if I type a single character, say 'P', then the TableView would update with
+     * all instances that start with 'P.' Then, if I tacked on another character to that string, say 'Pa', then the TableView would
+     * automatically update to show all instances that start with 'Pa', so on and so forth until a user finds what they're
+     * trying to search.
+     * @param args a string array of arguments supplied from the command line
+     */
     public static void main(String[] args) {
         launch();
     }
