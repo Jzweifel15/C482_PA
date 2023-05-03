@@ -112,35 +112,35 @@ public class ModifyPartController implements Initializable {
             if (inv > max) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
-                alert.setHeaderText("Error Adding New Part");
+                alert.setHeaderText("Error Modifying Part");
                 alert.setContentText("The total number in inventory cannot exceed the upper bound (max) allowed in inventory");
                 alert.showAndWait();
             }
             else if (inv < min) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
-                alert.setHeaderText("Error Adding New Part");
+                alert.setHeaderText("Error Modifying Part");
                 alert.setContentText("The total number in inventory cannot be less than the lower bound (min) allowed in inventory");
                 alert.showAndWait();
             }
             else if (min == max) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
-                alert.setHeaderText("Error Adding New Part");
+                alert.setHeaderText("Error Modifying Part");
                 alert.setContentText("The upper bound and lower bound allowed in inventory cannot be the same");
                 alert.showAndWait();
             }
             else if (min > max) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
-                alert.setHeaderText("Error Adding New Part");
+                alert.setHeaderText("Error Modifying Part");
                 alert.setContentText("The lower bound allowed in inventory cannot exceed the upper bound");
                 alert.showAndWait();
             }
             else if (max < min) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
-                alert.setHeaderText("Error Adding New Part");
+                alert.setHeaderText("Error Modifying Part");
                 alert.setContentText("The upper bound allowed in inventory cannot be less than the lower bound");
                 alert.showAndWait();
             }
