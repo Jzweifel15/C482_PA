@@ -129,33 +129,63 @@ public class ModifyProductController implements Initializable {
             max = Integer.parseInt(maxTextField.getText());
             min = Integer.parseInt(minTextField.getText());
 
-            Product updatedProduct = new Product(id, name, priceCost, inv, min, max);
-
-            for (Part associatedPart : this.associatedParts) {
-                updatedProduct.addAssociatedPart(associatedPart);
+            if (inv > max) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error Modifying Product");
+                alert.setContentText("The total number in inventory cannot exceed the upper bound (max) allowed in inventory");
+                alert.showAndWait();
             }
+            else if (inv < min) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error Modifying Product");
+                alert.setContentText("The total number in inventory cannot be less than the lower bound (min) allowed in inventory");
+                alert.showAndWait();
+            }
+            else if (min == max) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error Modifying Product");
+                alert.setContentText("The upper bound and lower bound allowed in inventory cannot be the same");
+                alert.showAndWait();
+            }
+            else if (min > max) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error Modifying Product");
+                alert.setContentText("The lower bound allowed in inventory cannot exceed the upper bound");
+                alert.showAndWait();
+            }
+            else if (max < min) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error Modifying Product");
+                alert.setContentText("The upper bound allowed in inventory cannot be less than the lower bound");
+                alert.showAndWait();
+            }
+            else {
+                Product updatedProduct = new Product(id, name, priceCost, inv, min, max);
 
-            inventory.updateProduct(index, updatedProduct);
+                for (Part associatedPart : this.associatedParts) {
+                    updatedProduct.addAssociatedPart(associatedPart);
+                }
 
-            // Clear all TextFields before transitioning back to Main View
-            nameTextField.clear();
-            inventoryTextField.clear();
-            priceCostTextField.clear();
-            maxTextField.clear();
-            minTextField.clear();
+                inventory.updateProduct(index, updatedProduct);
 
-            // Transition back to Main View
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/main-view.fxml"));
-            MainController controller = new MainController(this.inventory);
-            fxmlLoader.setController(controller);
+                // Transition back to Main View
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/demo/view/main-view.fxml"));
+                MainController controller = new MainController(this.inventory);
+                fxmlLoader.setController(controller);
 
-            Parent root = fxmlLoader.load();
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root, 900, 400);
-            stage.setTitle("Inventory Management System!");
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.show();
+                Parent root = fxmlLoader.load();
+                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root, 900, 400);
+                stage.setTitle("Inventory Management System!");
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+            }
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
