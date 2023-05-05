@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -130,30 +131,35 @@ public class ModifyProductController implements Initializable {
                     alert.setTitle("Error");
                     alert.setHeaderText("Error Modifying Product");
                     alert.setContentText("The total number in inventory cannot exceed the upper bound (max) allowed in inventory");
+                    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                     alert.showAndWait();
                 } else if (inv < min) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("Error Modifying Product");
                     alert.setContentText("The total number in inventory cannot be less than the lower bound (min) allowed in inventory");
+                    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                     alert.showAndWait();
                 } else if (min == max) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("Error Modifying Product");
                     alert.setContentText("The upper bound and lower bound allowed in inventory cannot be the same");
+                    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                     alert.showAndWait();
                 } else if (min > max) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("Error Modifying Product");
                     alert.setContentText("The lower bound allowed in inventory cannot exceed the upper bound");
+                    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                     alert.showAndWait();
                 } else if (max < min) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("Error Modifying Product");
                     alert.setContentText("The upper bound allowed in inventory cannot be less than the lower bound");
+                    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                     alert.showAndWait();
                 } else {
                     Product updatedProduct = new Product(id, name, priceCost, inv, min, max);
@@ -183,6 +189,7 @@ public class ModifyProductController implements Initializable {
                 alert.setTitle("Error");
                 alert.setHeaderText("Error Modifying Product");
                 alert.setContentText("We ran into an issue while performing your Product modification request. Please verify that all fields are filled in correctly and try again.");
+                alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                 alert.showAndWait();
             }
         }
@@ -191,6 +198,7 @@ public class ModifyProductController implements Initializable {
             alert.setTitle("Error");
             alert.setHeaderText("Error Modifying Product");
             alert.setContentText("We ran into an issue while performing your Product modification request. Please verify that all fields are filled in and try again.");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.showAndWait();
         }
     }
@@ -247,6 +255,7 @@ public class ModifyProductController implements Initializable {
             alert.setTitle("Error");
             alert.setHeaderText("Error Searching for Part");
             alert.setContentText("Seems we could not find that Part. Please, try again.");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.showAndWait();
         }
 

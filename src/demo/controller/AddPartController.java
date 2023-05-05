@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -78,30 +79,35 @@ public class AddPartController implements Initializable {
                     alert.setTitle("Error");
                     alert.setHeaderText("Error Adding New Part");
                     alert.setContentText("The total number in inventory cannot exceed the upper bound (max) allowed in inventory");
+                    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                     alert.showAndWait();
                 } else if (inv < min) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("Error Adding New Part");
                     alert.setContentText("The total number in inventory cannot be less than the lower bound (min) allowed in inventory");
+                    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                     alert.showAndWait();
                 } else if (min == max) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("Error Adding New Part");
                     alert.setContentText("The upper bound and lower bound allowed in inventory cannot be the same");
+                    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                     alert.showAndWait();
                 } else if (min > max) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("Error Adding New Part");
                     alert.setContentText("The lower bound allowed in inventory cannot exceed the upper bound");
+                    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                     alert.showAndWait();
                 } else if (max < min) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("Error Adding New Part");
                     alert.setContentText("The upper bound allowed in inventory cannot be less than the lower bound");
+                    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                     alert.showAndWait();
                 } else {
 
@@ -133,6 +139,7 @@ public class AddPartController implements Initializable {
                 alert.setTitle("Error");
                 alert.setHeaderText("Error Adding New Part");
                 alert.setContentText("We ran into an issue trying to add your new part request. Please verify that all fields are filled in correctly");
+                alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                 alert.showAndWait();
             }
         }
@@ -141,6 +148,7 @@ public class AddPartController implements Initializable {
             alert.setTitle("Error");
             alert.setHeaderText("Error Adding New Part");
             alert.setContentText("We ran into an issue trying to add your new part request. Please verify that all fields are filled in and try again.");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.showAndWait();
         }
     }

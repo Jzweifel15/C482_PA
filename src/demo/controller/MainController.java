@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -126,6 +127,7 @@ public class MainController implements Initializable {
         alert.setHeaderText("Are you sure you want to delete " + partSelected.getName() + "? If this part is \n" +
                                 " is associated with a product, then it will no longer be associated.");
         alert.setContentText("Click OK to confirm");
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
@@ -203,6 +205,7 @@ public class MainController implements Initializable {
             alert.setHeaderText("Error Trying to Delete Product");
             alert.setContentText("Cannot delete the selected product because it currently still has parts " +
                                     "associated with it.");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.showAndWait();
         }
         else {
@@ -210,6 +213,7 @@ public class MainController implements Initializable {
             alert.setTitle("Delete Product");
             alert.setHeaderText("Are you sure you want to delete " + productSelected.getName() + "?");
             alert.setContentText("Click OK to confirm");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
@@ -250,6 +254,7 @@ public class MainController implements Initializable {
             alert.setTitle("Error");
             alert.setHeaderText("Error Searching for Part");
             alert.setContentText("Seems we could not find that Part. Please, try again.");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.showAndWait();
         }
 
@@ -288,6 +293,7 @@ public class MainController implements Initializable {
             alert.setTitle("Error");
             alert.setHeaderText("Error Searching for Product");
             alert.setContentText("Seems we could not find that Product. Please, try again.");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.showAndWait();
         }
 
