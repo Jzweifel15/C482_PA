@@ -239,7 +239,6 @@ public class MainController implements Initializable {
                     parts.add(part);
                 }
             }
-            // Neither a full/partial name or an ID was found - show Error alert window
             catch (NumberFormatException e) {
                 // Do nothing
             }
@@ -259,8 +258,8 @@ public class MainController implements Initializable {
     }
 
     /**
-     *
-     * @param actionEvent
+     * Searches for the Product by its name or for the supplied Product ID
+     * @param actionEvent an ActionEvent object
      */
     public void searchForProduct(ActionEvent actionEvent) {
         String input = productSearchField.getText();
@@ -269,7 +268,7 @@ public class MainController implements Initializable {
 
         // Check if no Product was added to list through a partial/full name. If empty, then maybe user
         // typed in a ID no., so search based on that argument
-        if (products.size() == 0) {
+        if (products.isEmpty() == true) {
             try {
                 int id = Integer.parseInt(input);
                 Product product = inventory.lookupProduct(id);
@@ -279,13 +278,21 @@ public class MainController implements Initializable {
                 }
             }
             catch (NumberFormatException e) {
-                // ignore for now...
+                // Do nothing...
             }
+        }
+
+        // Do second check to see if Parts is still empty. If so, then show Error alert window
+        if (products.isEmpty() == true) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error Searching for Product");
+            alert.setContentText("Seems we could not find that Product. Please, try again.");
+            alert.showAndWait();
         }
 
         // Show the returned results in the TableView
         productsTableView.setItems(products);
-        productsTableView.refresh();
     }
 
     /**
