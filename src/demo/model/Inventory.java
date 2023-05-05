@@ -118,7 +118,7 @@ public class Inventory {
         for (Product product : allProducts) {
             // Returns a boolean to check if the partial name that has been entered in search field
             // does or does not exist in allProducts
-            if (product.getName().contains(productName)) {
+            if (product.getName().toLowerCase().contains(productName.toLowerCase())) {
                 namedProducts.add(product);
             }
         }
