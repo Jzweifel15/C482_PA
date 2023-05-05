@@ -213,11 +213,12 @@ public class AddProductController implements Initializable {
     public void searchForPart(ActionEvent actionEvent) {
         String input = searchPartTextField.getText();
 
+        // Looks up Part by name (String) first
         ObservableList<Part> parts = this.inventory.lookupPart(input);
 
         // Check if no Part was added to list through a partial/full name. If empty, then maybe user
         // typed in a ID no., so search based on that argument
-        if (parts.size() == 0) {
+        if (parts.isEmpty() == true) {
             try {
                 int id = Integer.parseInt(input);
                 Part part = inventory.lookupPart(id);
@@ -227,13 +228,21 @@ public class AddProductController implements Initializable {
                 }
             }
             catch (NumberFormatException e) {
-                // ignore for now...
+                // Do nothing
             }
+        }
+
+        // Do second check to see if Parts is still empty. If so, then show Error alert window
+        if (parts.isEmpty() == true) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error Searching for Part");
+            alert.setContentText("Seems we could not find that Part. Please, try again.");
+            alert.showAndWait();
         }
 
         // Show the returned results in the TableView
         partTableView1.setItems(parts);
-        partTableView1.refresh();
     }
 
     /**
