@@ -78,7 +78,7 @@ public class Inventory {
         for (Part part : allParts) {
             // Returns a boolean to check if the partial name that has been entered in search field
             // does or does not exist in allParts
-            if (part.getName().contains(partName)) {
+            if (part.getName().toLowerCase().contains(partName.toLowerCase())) {
                 namedParts.add(part);
             }
         }
